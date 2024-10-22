@@ -1,5 +1,5 @@
 import { PageNotFound } from '@/components';
 
-export default function ProductNotFoundPage() {
+export default function GenderNotFoundPage() {
 	return <PageNotFound />;
 }

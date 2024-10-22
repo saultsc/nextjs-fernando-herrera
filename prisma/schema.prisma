@@ -25,9 +25,11 @@ enum Gender {
 }
 
 model Category {
-  id      String    @id @default(uuid())
-  name    String    @unique
-  Product Product[]
+  id        String    @id @default(uuid())
+  name      String    @unique
+  Product   Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Product {
@@ -42,11 +44,14 @@ model Product {
   gender      Gender
 
   // Relaciones
-  
-  category     Category       @relation(fields: [categoryId], references: [id])
-  categoryId   String
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
 
   ProductImage ProductImage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([gender])
 }
@@ -57,4 +62,7 @@ model ProductImage {
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
