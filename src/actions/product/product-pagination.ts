@@ -34,6 +34,7 @@ export const getPaginationProductsWithImages = async ({
 				gender,
 			},
 		});
+
 		const totalProducts = await prisma.product.count({
 			where: {
 				gender,
@@ -43,9 +44,9 @@ export const getPaginationProductsWithImages = async ({
 		return {
 			currentPage: page,
 			totalPages: Math.ceil(totalProducts / take),
-			products: products.map((product) => ({
-				...product,
-				images: product.ProductImage.map((image) => image.url),
+			products: products.map(({ ProductImage, ...rest }) => ({
+				...rest,
+				images: ProductImage.map((image) => image.url),
 			})),
 		};
 	} catch (error) {
